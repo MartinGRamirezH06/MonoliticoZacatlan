@@ -31,7 +31,7 @@ public class VendedorEntity {
     private String correo;
 
     @Column(nullable = false,length = 10)
-    private Integer telefono;
+    private String telefono;
 
     @Column(nullable = false, length = 8)
     private String rol;

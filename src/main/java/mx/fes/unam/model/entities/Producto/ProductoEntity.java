@@ -28,6 +28,9 @@ public class ProductoEntity {
     @Column(nullable = true, length = 50)
     private String categoria;
 
+    @Column(name = "ruta_imagen", length = 255)
+    private String rutaImagen;
+
     //Me falta verificar si necesito crear una columna
     // para guardar la imagen en la base
 
