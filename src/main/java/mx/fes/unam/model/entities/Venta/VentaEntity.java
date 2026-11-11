@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import mx.fes.unam.model.entities.Producto.ProductoEntity;
+import mx.fes.unam.model.entities.Vendedor.VendedorEntity;
 
 import java.text.DateFormat;
 
@@ -22,7 +23,7 @@ public class VentaEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "vendedor_id", referencedColumnName = "id", nullable = false)
-    private VentaEntity vendedor;
+    private VendedorEntity vendedor;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "producto_id",referencedColumnName = "id", nullable = false)

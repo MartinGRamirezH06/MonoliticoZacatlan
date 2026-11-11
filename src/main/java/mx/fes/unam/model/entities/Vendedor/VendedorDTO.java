@@ -20,4 +20,5 @@ public class VendedorDTO {
     String telefono;
     String rol;
     Boolean status;
+    String password;
 }
