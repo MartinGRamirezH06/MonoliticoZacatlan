@@ -1,12 +1,12 @@
-package mx.fes.unam.model.entities.Venta;
+package mx.fes.unam.model.entities.venta;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import mx.fes.unam.model.entities.Producto.ProductoEntity;
-import mx.fes.unam.model.entities.Vendedor.VendedorEntity;
+import mx.fes.unam.model.entities.producto.ProductoEntity;
+import mx.fes.unam.model.entities.vendedor.VendedorEntity;
 
 import java.text.DateFormat;
 
@@ -30,7 +30,7 @@ public class VentaEntity {
     private ProductoEntity producto;
 
     @Column(nullable = false, length = 50)
-    private DateFormat fecha_venta;
+    private DateFormat fecha;
 
     @Column(nullable = false, length = 50)
     private Long cantidad;

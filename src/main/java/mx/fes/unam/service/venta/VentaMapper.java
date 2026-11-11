@@ -1,9 +1,9 @@
 package mx.fes.unam.service.venta;
 
-import mx.fes.unam.model.entities.Producto.ProductoEntity;
-import mx.fes.unam.model.entities.Vendedor.VendedorEntity;
-import mx.fes.unam.model.entities.Venta.VentaDTO;
-import mx.fes.unam.model.entities.Venta.VentaEntity;
+import mx.fes.unam.model.entities.producto.ProductoEntity;
+import mx.fes.unam.model.entities.vendedor.VendedorEntity;
+import mx.fes.unam.model.entities.venta.VentaDTO;
+import mx.fes.unam.model.entities.venta.VentaEntity;
 
 public class VentaMapper {
     public VentaEntity toEntity(VentaDTO dto){
@@ -11,7 +11,7 @@ public class VentaMapper {
 
         if(dto!=null){
             venta.setId(dto.getId());
-            venta.setFecha_venta(dto.getFecha_venta());
+            venta.setFecha(dto.getFecha());
             venta.setCantidad(dto.getCantidad());
             venta.setTotal(dto.getTotal());
 
@@ -57,7 +57,7 @@ public class VentaMapper {
                     nombreVendedor,
                     productoId,
                     nombreProducto,
-                    venta.getFecha_venta(),
+                    venta.getFecha(),
                     venta.getCantidad(),
                     venta.getTotal()
             );

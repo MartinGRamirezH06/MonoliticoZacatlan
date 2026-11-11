@@ -1,7 +1,7 @@
 package mx.fes.unam.service.bloque;
 
-import mx.fes.unam.model.entities.Bloque.BloqueDTO;
-import mx.fes.unam.model.entities.Bloque.BloqueEntity;
+import mx.fes.unam.model.entities.bloque.BloqueDTO;
+import mx.fes.unam.model.entities.bloque.BloqueEntity;
 
 public class BloqueMapper {
     public BloqueEntity toEntity(BloqueDTO dto){

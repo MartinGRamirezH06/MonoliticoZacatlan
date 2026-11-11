@@ -1,0 +1,202 @@
+:root{
+    --guinda:#691033;
+    --guinda-dark: #450B24;
+    --guinda-light: #8A1748;
+    --white: #FFFFFF;
+    --gray: #55515A;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Montserrat', sans-serif;
+}
+.login-container{
+    position:relative;
+    width: 100%;
+    min-height: 100vh;
+    overflow: hidden;
+    display:flex;
+    flex-direction: column;
+}
+
+.background-image{
+    position: absolute;
+    inset: 0;
+    background-image: url("../img/imagenZacatlan2.jpg");
+    background-size: cover;
+    background-position: center;
+    z-index: -2;
+}
+.background-difuminado{
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+    90deg,
+    rgba(69,11,36,0.92)0%,
+    rgba(105, 16, 51, 0.68) 45%,
+    rgba(69, 11, 36, 0.65) 100%
+    );
+    z-index: -1;
+}
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2.5rem 7%;
+    color: var(--white);
+    z-index: 2;
+}
+.logo{
+    width: 5rem;
+}
+.marca{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.marca-icono{
+    font-size: 65px;
+}
+.marca-division{
+    width: 3px;
+    height: 90px;
+    background: var(--white);
+}
+.marca-nombre h1{
+    font-size: 2.2rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin: 0;
+}
+.marca-nombre span{
+    font-size: 0.8rem;
+    letter-spacing: 5px;
+}
+.header-mensaje{
+    font-size: 1.4rem;
+    text-align: right;
+}
+.header-mensaje strong{
+    display: block;
+    font-weight: 800;
+}
+.mensaje-linea{
+    width: 100px;
+    height: 7px;
+    background: var(--guinda);
+    margin: 0.9rem 0 0 auto;
+}
+.content{
+    flex: 1;
+    padding: 1.2rem 7% 50px;
+    z-index: 2;
+}
+.login-card{
+    background: rgba(255,255,255,0.90);
+    backdrop-filter: blur(0.7rem);
+    -webkit-backdrop-filter: blur(0.7rem);
+    border-radius: 1.7rem;
+    padding: 2.2rem 2.6rem;
+    box-shadow: 0 0.9rem 50px rgba(0,0,0,0.25);
+    text-align: center;
+}
+.login-icon{
+    color: var(--guinda);
+    font-size: 85px;
+    margin-bottom: 10px;
+}
+.login-title h2{
+    color: var(--guinda);
+    font-size: 1.6rem;
+    font-weight: 800;
+    line-height: 1.3;
+}
+.login-title p{
+    color: var(--gray);
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-top: 0.7rem;
+}
+.separador{
+    width: 100%;
+    height: 2px;
+    background: var(--guinda-light);
+    margin: 1.3rem 0;
+}
+.input-group{
+    height: 60px;
+}
+.input-group-text{
+    background: rgba(255,255,255,0.95);
+    border: 1px solid #ded9dc;
+    border-right: none;
+    color: var(--guinda);
+    font-size: 1.2rem;
+    padding: 0 1rem;
+    border-radius: 13px 0 0 13px;
+}
+.font-control{
+    background: rgba(255,255,255,0.95);
+    border:1px solid #ded9dc;
+    border-left: none;
+    font-size: 1rem;
+    border-radius: 0 13px 13px 0;
+}
+.font-control:focus{
+    box-shadow: none;
+    border-color: var(--guinda-dark);
+    background: white;
+}
+.input-group:focus-within .input-group-text{
+    border-color: var(--guinda-light);
+}
+.form-control::placeholder{
+    color:#89848a;
+}
+.password-toggle{
+    border-left: none;
+    border-radius: 0 13px 13px 0;
+    cursor: pointer;
+}
+.login-button{
+    height: 60px;
+    background: var(--guinda);
+    color:white;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 0.7rem;
+    transition: all 0.3s ease;
+}
+.login-button:hover{
+    background: var(--guinda-dark);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(105,16,51,0.25);
+}
+.footer{
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 15px 7%;
+    background: rgba(69,11,36,0.95);
+    color: white;
+    font-size: 0.9rem;
+    z-index: 2;
+}
+.footer-marca{
+    font-size: 45px;
+}
+.footer-division{
+    height: 45px;
+    width: 2px;
+    background: white;
+}
+.footer b{
+    margin:0 8px;
+}

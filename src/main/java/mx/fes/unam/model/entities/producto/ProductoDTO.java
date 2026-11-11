@@ -1,4 +1,4 @@
-package mx.fes.unam.model.entities.Producto;
+package mx.fes.unam.model.entities.producto;
 
 
 import lombok.AllArgsConstructor;

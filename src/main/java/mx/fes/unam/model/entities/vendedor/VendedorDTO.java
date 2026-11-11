@@ -1,4 +1,4 @@
-package mx.fes.unam.model.entities.Vendedor;
+package mx.fes.unam.model.entities.vendedor;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

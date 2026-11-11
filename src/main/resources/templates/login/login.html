@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        lang="es">
+<head th:replace="~{plantilla/plantilla :: head}"></head>
+<body>
+    <main class="login-container">
+        <div class="background-image"></div>
+        <div class="background-difuminado"></div>
+        <div class="decoration"></div>
+        <header class="header container-fluid">
+            <div class="marca">
+                <div class="marca-icono">
+                    <img th:src="@{/img/Logo_Zacatlan.png}" alt="logoZacatlan" class="logo">
+                </div>
+                <div class="marca-division"></div>
+                <div class="marca-nombre">
+                    <h1>ZACATLÁN</h1>
+                    <span>--P U E B L A--</span>
+                </div>
+            </div>
+            <div class="header-mensaje">
+                Juntos construimos
+                <strong>un mejor Zacatlán</strong>
+                <div class="mensaje-linea"></div>
+            </div>
+        </header>
+        <section class="content container-fluid">
+            <div class="row justify-content-end align-items-center h-100">
+                <div class="col-12 col-md-8 col-lg-5 col-xl-4">
+                    <div class="login-card">
+                        <div class="login-icon">
+                            <i class="bi bi-buildings"></i>
+                        </div>
+                        <div class="login-title">
+                            <h2>Sistema de Recoleccion de Informacion</h2>
+                            <p>Municipio de Zacatlan</p>
+                        </div>
+
+                        <div class="separador"></div>
+                        <form action="" id="loginForm">
+                            <div class="form-group mb-4">
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="bi bi-person-fill"></i>
+                                    </span>
+                                        <input
+                                                type="text"
+                                                class="form-control"
+                                                placeholder="Usuario"
+                                                id="username"
+                                                required
+                                        >
+                                </div>
+                            </div>
+                            <div class="form-group mb-4">
+                                <div class="input-group form-password">
+                                    <span class="input-group-text">
+                                        <i class="bi bi-lock-fill"></i>
+                                    </span>
+
+                                    <input
+                                            type="password"
+                                            class="form-control"
+                                            placeholder="Contraseña"
+                                            id="password"
+                                            required
+                                    >
+                                    <button
+                                            class="input-group-text password-toggle form-password-action"
+                                            type="button"
+                                            id="togglePassword"
+                                            data-coreui-toggle="password"
+                                            aria-pressed="false"
+                                            aria-label="Mostrar contraseña"
+                                    >
+                                        <i class="bi bi-eye-slash-fill form-password-action-icon"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn login-button w-100">
+                                <i class="bi bi-box-arrow-in-right me-2"></i>
+                                Iniciar Sesion
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <footer class="footer">
+            <div class="footer-marca">
+                <i class="bi bi-buildings"></i>
+            </div>
+            <div class="footer-division"></div>
+            <span>Gobierno de Zacatlan<b>.</b>Puebla</span>
+        </footer>
+    </main>
+</body>
+<script th:replace="~{plantilla/plantilla :: scriptMovimiento}"></script>
+<script th:src="@{/js/animationLogin.js}"></script>
+</html>

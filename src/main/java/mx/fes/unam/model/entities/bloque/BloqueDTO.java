@@ -1,4 +1,4 @@
-package mx.fes.unam.model.entities.Bloque;
+package mx.fes.unam.model.entities.bloque;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

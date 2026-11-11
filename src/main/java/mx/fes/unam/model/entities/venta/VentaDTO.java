@@ -1,4 +1,4 @@
-package mx.fes.unam.model.entities.Venta;
+package mx.fes.unam.model.entities.venta;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,7 +17,7 @@ public class VentaDTO {
     String vendedorNombre;
     Long productoId;
     String productoNombre;
-    DateFormat fecha_venta;
+    DateFormat fecha;
     Long cantidad;
     Double total;
 }

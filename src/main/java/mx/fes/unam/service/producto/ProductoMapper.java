@@ -1,8 +1,8 @@
 package mx.fes.unam.service.producto;
 
 
-import mx.fes.unam.model.entities.Producto.ProductoDTO;
-import mx.fes.unam.model.entities.Producto.ProductoEntity;
+import mx.fes.unam.model.entities.producto.ProductoDTO;
+import mx.fes.unam.model.entities.producto.ProductoEntity;
 
 public class ProductoMapper {
     public ProductoEntity toEntity(ProductoDTO dto){

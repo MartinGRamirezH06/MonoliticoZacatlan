@@ -1,11 +1,11 @@
-package mx.fes.unam.model.entities.Vendedor;
+package mx.fes.unam.model.entities.vendedor;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import mx.fes.unam.model.entities.Bloque.BloqueEntity;
+import mx.fes.unam.model.entities.bloque.BloqueEntity;
 
 @Entity
 @Table(name = "vendedor")

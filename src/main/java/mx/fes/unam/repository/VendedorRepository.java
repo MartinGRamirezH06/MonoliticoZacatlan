@@ -1,7 +1,7 @@
 package mx.fes.unam.repository;
 
-import mx.fes.unam.model.entities.Producto.ProductoEntity;
-import mx.fes.unam.model.entities.Vendedor.VendedorEntity;
+import mx.fes.unam.model.entities.producto.ProductoEntity;
+import mx.fes.unam.model.entities.vendedor.VendedorEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
