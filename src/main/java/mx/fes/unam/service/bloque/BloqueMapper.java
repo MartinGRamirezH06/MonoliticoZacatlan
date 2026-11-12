@@ -12,6 +12,7 @@ public class BloqueMapper {
             bloque.setId(dto.getId());
             bloque.setNombre(dto.getNombre());
             bloque.setDescripcion(dto.getDescripcion());
+            bloque.setStatus(dto.getStatus());
         }
         return bloque;
     }
@@ -22,7 +23,8 @@ public class BloqueMapper {
             dto = new BloqueDTO(
                     bloque.getId(),
                     bloque.getNombre(),
-                    bloque.getDescripcion()
+                    bloque.getDescripcion(),
+                    bloque.getStatus()
             );
         }
         return dto;

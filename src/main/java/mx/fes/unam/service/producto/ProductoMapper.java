@@ -14,6 +14,7 @@ public class ProductoMapper {
             producto.setNombre(dto.getNombre());
             producto.setPrecio_min(dto.getPrecio_min());
             producto.setCategoria(dto.getCategoria());
+            producto.setStatus(dto.getStatus());
         }
         return producto;
     }
@@ -25,7 +26,8 @@ public class ProductoMapper {
                     producto.getId(),
                     producto.getNombre(),
                     producto.getPrecio_min(),
-                    producto.getCategoria()
+                    producto.getCategoria(),
+                    producto.getStatus()
             );
         }
         return dto;

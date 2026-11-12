@@ -17,5 +17,6 @@ public class ProductoDTO {
     String nombre;
     BigDecimal precio_min;
     String categoria;
+    Boolean status;
 
 }

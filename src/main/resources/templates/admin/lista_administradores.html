@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head th:replace="~{plantilla/plantilla :: head}"></head>
+<body th:replace="~{plantilla/plantilla :: body(~{::#contenido-dinamico},'administradores')}">
+<div id="contenido-dinamico">
+    <section class="admin-content container-fluid">
+        <div class="section-header">
+            <div class="section-title">
+                <div class="section-icon"><i class="bi bi-person-gear"></i></div>
+                <div>
+                    <h1>Administradores</h1>
+                    <p>Gestiona los administradores del sistema</p>
+                </div>
+            </div>
+            <button class="btn btn-primary btn-add" type="button"
+                    data-bs-toggle="modal" data-bs-target="#modalForm"
+                    data-modo="crear" data-titulo="Agregar administrador"
+                    th:attr="data-action=@{/admin/administradores/crear}">
+                <i class="bi bi-plus-lg me-2"></i> Agregar Administrador
+            </button>
+        </div>
+
+        <div class="table-search">
+            <i class="bi bi-search"></i>
+            <input type="search" class="form-control" placeholder="Buscar administrador">
+        </div>
+        <div class="table-responsive">
+            <table class="table admin-table align-middle">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Apellido paterno</th>
+                    <th>Apellido materno</th>
+                    <th>Correo</th>
+                    <th>Telefono</th>
+                    <th>Status</th>
+                    <th>Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="a : ${administradores}">
+                    <td th:text="${a.id}"></td>
+                    <td th:text="${a.nombre}"></td>
+                    <td th:text="${a.apellido_paterno}"></td>
+                    <td th:text="${a.apellido_materno}"></td>
+                    <td th:text="${a.correo}"></td>
+                    <td th:text="${a.telefono}"></td>
+                    <td>
+                        <span class="status-badge" th:classappend="${a.status} ? 'status-active' : 'status-inactive'">
+                            <i class="bi bi-circle-fill"></i>
+                            <span th:text="${a.status} ? 'Activo' : 'Inactivo'"></span>
+                        </span>
+                    </td>
+                    <td>
+                        <div class="table-actions">
+                            <button type="button" class="btn-action" title="Editar"
+                                    data-bs-toggle="modal" data-bs-target="#modalForm"
+                                    data-modo="editar" data-titulo="Editar administrador"
+                                    th:attr="data-action=@{/admin/administradores/{id}/editar(id=${a.id})},
+                                             data-campo-nombre=${a.nombre},
+                                             data-campo-apellido_paterno=${a.apellido_paterno},
+                                             data-campo-apellido_materno=${a.apellido_materno},
+                                             data-campo-correo=${a.correo},
+                                             data-campo-telefono=${a.telefono}">
+                                <i class="bi bi-pencil-fill"></i>
+                            </button>
+                            <form th:if="${a.status}" th:action="@{/admin/administradores/{id}/desactivar(id=${a.id})}" method="post" class="d-inline">
+                                <button type="submit" class="btn-action btn-delete" title="Desactivar"
+                                        onclick="return confirm('¿Desactivar este administrador?')">
+                                    <i class="bi bi-trash-fill"></i>
+                                </button>
+                            </form>
+                            <form th:unless="${a.status}" th:action="@{/admin/administradores/{id}/reactivar(id=${a.id})}" method="post" class="d-inline">
+                                <button type="submit" class="btn-action" title="Reactivar">
+                                    <i class="bi bi-arrow-counterclockwise"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(administradores)}">
+                    <td colspan="8" class="text-center text-muted">No hay administradores registrados</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="modal fade" id="modalForm" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <form method="post">
+                        <div class="modal-header">
+                            <h5 class="modal-title"></h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <label class="form-label">Nombre</label>
+                                    <input type="text" class="form-control" name="nombre" maxlength="20" required>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label">Apellido paterno</label>
+                                    <input type="text" class="form-control" name="apellido_paterno" maxlength="50" required>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label">Apellido materno</label>
+                                    <input type="text" class="form-control" name="apellido_materno" maxlength="50">
+                                </div>
+                                <div class="col-md-5">
+                                    <label class="form-label">Correo</label>
+                                    <input type="email" class="form-control" name="correo" maxlength="50" required>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">Telefono</label>
+                                    <input type="text" class="form-control" name="telefono" maxlength="10" required>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label">Contraseña</label>
+                                    <input type="password" class="form-control" name="password" maxlength="10"
+                                           placeholder="Vacío = no cambiar">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+</body>
+</html>

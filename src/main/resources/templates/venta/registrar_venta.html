@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head th:replace="~{plantilla/plantilla :: head}"></head>
+<body th:replace="~{plantilla/plantilla :: body(~{::#contenido-dinamico},'ventas')}">
+<div id="contenido-dinamico">
+    <section class="admin-content container-fluid">
+        <div class="section-header">
+            <div class="section-title">
+                <div class="section-icon"><i class="bi bi-cart-plus-fill"></i></div>
+                <div>
+                    <h1>Registrar venta</h1>
+                    <p>Captura tus ventas del día</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <!-- Formulario de nueva venta -->
+            <div class="col-lg-4">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="mb-3">Nueva venta</h5>
+                        <form th:action="@{/venta/registrar}" method="post">
+                            <div class="mb-3">
+                                <label class="form-label">Producto</label>
+                                <select class="form-select" name="productoId" id="productoVenta" required>
+                                    <option value="" disabled selected>Selecciona un producto</option>
+                                    <option th:each="p : ${productos}"
+                                            th:value="${p.id}"
+                                            th:text="${p.nombre + ' (mín. $' + p.precio_min + ')'}"
+                                            th:attr="data-min=${p.precio_min}"></option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Precio unitario</label>
+                                <input type="number" step="0.01" min="0" class="form-control"
+                                       name="precioUnitario" id="precioVenta" required>
+                                <div class="form-text">No puede ser menor al mínimo del producto.</div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Cantidad</label>
+                                <input type="number" step="1" min="1" value="1" class="form-control"
+                                       name="cantidad" id="cantidadVenta" required>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <span>Total</span>
+                                <strong class="fs-5" id="totalVenta">$0.00</strong>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">
+                                <i class="bi bi-check-lg me-2"></i> Registrar venta
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reporte del día -->
+            <div class="col-lg-8">
+                <div class="row g-3 mb-3">
+                    <div class="col-sm-6">
+                        <div class="card border-0 shadow-sm"><div class="card-body">
+                            <small class="text-muted">Ventas registradas</small>
+                            <div class="fs-3 fw-bold" th:text="${reporte.numeroVentas}">0</div>
+                        </div></div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="card border-0 shadow-sm"><div class="card-body">
+                            <small class="text-muted">Total vendido</small>
+                            <div class="fs-3 fw-bold"
+                                 th:text="'$' + ${#numbers.formatDecimal(reporte.totalGeneral, 1, 'COMMA', 2, 'POINT')}">$0.00</div>
+                        </div></div>
+                    </div>
+                </div>
+
+                <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-2">
+                    <h5 class="mb-0">Ventas del <span th:text="${reporte.desde}"></span></h5>
+                    <form th:action="@{/venta/reporte/pdf}" method="get" class="d-flex gap-2">
+                        <input type="date" name="fecha" class="form-control" th:value="${reporte.desde}">
+                        <button type="submit" class="btn btn-outline-secondary text-nowrap">
+                            <i class="bi bi-file-earmark-pdf-fill me-1"></i> PDF
+                        </button>
+                    </form>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table admin-table align-middle">
+                        <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Cantidad</th>
+                            <th>Precio unitario</th>
+                            <th>Total</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="v : ${reporte.ventas}">
+                            <td th:text="${v.productoNombre}"></td>
+                            <td th:text="${v.cantidad}"></td>
+                            <td th:text="'$' + ${#numbers.formatDecimal(v.precioUnitario, 1, 'COMMA', 2, 'POINT')}"></td>
+                            <td th:text="'$' + ${#numbers.formatDecimal(v.total, 1, 'COMMA', 2, 'POINT')}"></td>
+                        </tr>
+                        <tr th:if="${#lists.isEmpty(reporte.ventas)}">
+                            <td colspan="4" class="text-center text-muted">Aún no has registrado ventas hoy</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+</body>
+</html>

@@ -38,7 +38,7 @@ public class VendedorEntity {
     private Rol rol;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "bloque_id",referencedColumnName = "id",nullable = false)
+    @JoinColumn(name = "bloque_id",referencedColumnName = "id")
     private BloqueEntity bloque;
 
     @Column(nullable = false, length = 10)

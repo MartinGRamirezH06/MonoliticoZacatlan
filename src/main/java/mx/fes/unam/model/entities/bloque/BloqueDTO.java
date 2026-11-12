@@ -13,5 +13,5 @@ public class BloqueDTO {
     Long id;
     String nombre;
     String descripcion;
-
+    Boolean status;
 }

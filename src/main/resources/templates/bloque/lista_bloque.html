@@ -1,84 +1,109 @@
 <!DOCTYPE html>
-<html
-        xmlns:th="http://www.thymeleaf.org"
-        lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
 <head th:replace="~{plantilla/plantilla :: head}"></head>
 <body th:replace="~{plantilla/plantilla :: body(~{::#contenido-dinamico},'bloques')}">
-    <div id="contenido-dinamico">
-        <section class="admin-content container-fluid">
-            <div class="section-header">
-                <div class="section-title">
-                    <div class="section-icon">
-                        <i class="bi bi-box-seam-fill"></i>
-                    </div>
-                    <div>
-                        <h1>Bloques</h1>
-                        <p>Gestiona los bloques del sistema</p>
-                    </div>
+<div id="contenido-dinamico">
+    <section class="admin-content container-fluid">
+        <div class="section-header">
+            <div class="section-title">
+                <div class="section-icon"><i class="bi bi-grid-fill"></i></div>
+                <div>
+                    <h1>Bloques</h1>
+                    <p>Gestiona los bloques del sistema</p>
                 </div>
-                <button class="btn btn-primary btn-add"
-                        type="button"
-                        data-bs-toogle="modal"
-                        data-bs-target="#modalProducto"
-                >
-                    <i class="bi bi-plus-lg me-2"></i>
-                    Agregar Bloque
-                </button>
             </div>
+            <button class="btn btn-primary btn-add" type="button"
+                    data-bs-toggle="modal" data-bs-target="#modalForm"
+                    data-modo="crear" data-titulo="Agregar bloque"
+                    th:attr="data-action=@{/bloque/crear}">
+                <i class="bi bi-plus-lg me-2"></i> Agregar Bloque
+            </button>
+        </div>
 
-            <div class="table-search">
-                <i class="bi bi-search"></i>
-                <input
-                    type="search"
-                    class="form-control"
-                    placeholder="Buscar bloque"
-                    id="buscarBloque"
-                >
-            </div>
-            <div class="table-responsive">
-                <table class="table admin-table align-middle">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Nombre</th>
-                            <th>Descripcion</th>
-                            <th>Status</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>01</td>
-                        <td>COmida</td>
-                        <td>dcbreufhcbdreujhcbjedr</td>
-                        <td>
-                            <span class="status-badge status-active">
-                                <i class="bi bi-circle-fill"></i>
-                                Activo
-                            </span>
-                        </td>
-                        <td>
-                            <div class="table-actions">
-                                <button class="btn-action"
-                                        title="Editar">
-                                    <i class="bi bi-pencil-fill"></i>
-                                </button>
-
-                                <button class="btn-action btn-delete"
-                                        title="Eliminar">
+        <div class="table-search">
+            <i class="bi bi-search"></i>
+            <input type="search" class="form-control" placeholder="Buscar bloque">
+        </div>
+        <div class="table-responsive">
+            <table class="table admin-table align-middle">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Descripcion</th>
+                    <th>Status</th>
+                    <th>Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="b : ${bloques}">
+                    <td th:text="${b.id}"></td>
+                    <td th:text="${b.nombre}"></td>
+                    <td th:text="${b.descripcion}"></td>
+                    <td>
+                        <span class="status-badge" th:classappend="${b.status} ? 'status-active' : 'status-inactive'">
+                            <i class="bi bi-circle-fill"></i>
+                            <span th:text="${b.status} ? 'Activo' : 'Inactivo'"></span>
+                        </span>
+                    </td>
+                    <td>
+                        <div class="table-actions">
+                            <button type="button" class="btn-action" title="Editar"
+                                    data-bs-toggle="modal" data-bs-target="#modalForm"
+                                    data-modo="editar" data-titulo="Editar bloque"
+                                    th:attr="data-action=@{/bloque/{id}/editar(id=${b.id})},
+                                             data-campo-nombre=${b.nombre},
+                                             data-campo-descripcion=${b.descripcion}">
+                                <i class="bi bi-pencil-fill"></i>
+                            </button>
+                            <form th:if="${b.status}" th:action="@{/bloque/{id}/desactivar(id=${b.id})}" method="post" class="d-inline">
+                                <button type="submit" class="btn-action btn-delete" title="Desactivar"
+                                        onclick="return confirm('¿Desactivar este bloque?')">
                                     <i class="bi bi-trash-fill"></i>
                                 </button>
+                            </form>
+                            <form th:unless="${b.status}" th:action="@{/bloque/{id}/reactivar(id=${b.id})}" method="post" class="d-inline">
+                                <button type="submit" class="btn-action" title="Reactivar">
+                                    <i class="bi bi-arrow-counterclockwise"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(bloques)}">
+                    <td colspan="5" class="text-center text-muted">No hay bloques registrados</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="modal fade" id="modalForm" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <form method="post">
+                        <div class="modal-header">
+                            <h5 class="modal-title"></h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label class="form-label">Nombre</label>
+                                <input type="text" class="form-control" name="nombre" maxlength="50" required>
                             </div>
-                        </td>
-
-                    </tr>
-                    </tbody>
-                </table>
+                            <div class="mb-3">
+                                <label class="form-label">Descripcion</label>
+                                <textarea class="form-control" name="descripcion" rows="3"></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-
-
-
-        </section>
-    </div>
+        </div>
+    </section>
+</div>
 </body>
 </html>

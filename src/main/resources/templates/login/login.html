@@ -38,42 +38,24 @@
                         </div>
 
                         <div class="separador"></div>
-                        <form action="" id="loginForm">
+                        <form th:action="@{/login}" method="post" id="loginForm">
+                            <div class="alert alert-danger" th:if="${error}" th:text="${error}"></div>
+
                             <div class="form-group mb-4">
                                 <div class="input-group">
-                                    <span class="input-group-text">
-                                        <i class="bi bi-person-fill"></i>
-                                    </span>
-                                        <input
-                                                type="text"
-                                                class="form-control"
-                                                placeholder="Usuario"
-                                                id="username"
-                                                required
-                                        >
+                                    <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
+                                    <input type="text" class="form-control" placeholder="Correo"
+                                           id="username" name="correo" required>
                                 </div>
                             </div>
                             <div class="form-group mb-4">
                                 <div class="input-group form-password">
-                                    <span class="input-group-text">
-                                        <i class="bi bi-lock-fill"></i>
-                                    </span>
-
-                                    <input
-                                            type="password"
-                                            class="form-control"
-                                            placeholder="Contraseña"
-                                            id="password"
-                                            required
-                                    >
-                                    <button
-                                            class="input-group-text password-toggle form-password-action"
-                                            type="button"
-                                            id="togglePassword"
-                                            data-coreui-toggle="password"
-                                            aria-pressed="false"
-                                            aria-label="Mostrar contraseña"
-                                    >
+                                    <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
+                                    <input type="password" class="form-control" placeholder="Contraseña"
+                                           id="password" name="password" required>
+                                    <button class="input-group-text password-toggle form-password-action"
+                                            type="button" id="togglePassword" aria-pressed="false"
+                                            aria-label="Mostrar contraseña">
                                         <i class="bi bi-eye-slash-fill form-password-action-icon"></i>
                                     </button>
                                 </div>
