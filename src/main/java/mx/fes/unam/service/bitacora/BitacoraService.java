@@ -49,6 +49,14 @@ public class BitacoraService {
                 .map(bitacoraMapper::toDTO);
     }
 
+    /** Búsqueda con filtros opcionales (entidad, admin) dentro de un rango de fechas (inclusive). */
+    @Transactional(readOnly = true)
+    public List<BitacoraDTO> buscar(String entidad, Long adminId, LocalDate desde, LocalDate hasta) {
+        return bitacoraRepository
+                .buscar(entidad, adminId, desde.atStartOfDay(), hasta.plusDays(1).atStartOfDay())
+                .stream().map(bitacoraMapper::toDTO).toList();
+    }
+
     @Transactional(readOnly = true)
     public List<BitacoraDTO> historialDe(String entidad, Long entidadId) {
         return bitacoraRepository

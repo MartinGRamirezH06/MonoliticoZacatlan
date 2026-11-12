@@ -47,6 +47,10 @@
                    th:classappend="${menuActivo == 'reportes' ? 'active' : ''}">
                     <i class="bi bi-bar-chart-fill"></i><span>Reportes de ventas</span>
                 </a>
+                <a th:href="@{/admin/bitacora}" class="sidebar-link"
+                   th:classappend="${menuActivo == 'bitacora' ? 'active' : ''}">
+                    <i class="bi bi-journal-text"></i><span>Bitácora</span>
+                </a>
             </th:block>
             <th:block th:if="${usuario != null and !usuario.esAdmin()}">
                 <div class="side-section">VENTAS</div>

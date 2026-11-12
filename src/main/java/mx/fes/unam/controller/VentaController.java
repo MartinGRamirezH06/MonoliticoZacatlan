@@ -37,7 +37,7 @@ public class VentaController {
     public String registrar(@SessionAttribute(UsuarioSesion.ATRIBUTO) UsuarioSesion usuario, Model model) {
         model.addAttribute("productos", productoService.listarProductos(true));
         model.addAttribute("reporte", ventaService.reporteVendedor(usuario.id(), null));
-        return "venta/registrar_venta";
+        return "ventas/registrar_venta";
     }
 
     @PostMapping("/registrar")

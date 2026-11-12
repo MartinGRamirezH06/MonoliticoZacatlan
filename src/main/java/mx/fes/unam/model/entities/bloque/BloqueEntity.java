@@ -17,7 +17,7 @@ public class BloqueEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = true, length = 50)
+    @Column(nullable = true,  unique = true, length = 50)
     private String nombre;
 
     @Lob

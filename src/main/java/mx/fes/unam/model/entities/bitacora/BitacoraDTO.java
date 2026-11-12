@@ -2,6 +2,7 @@ package mx.fes.unam.model.entities.bitacora;
 
 import lombok.*;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
 public class BitacoraDTO {
@@ -13,4 +14,8 @@ public class BitacoraDTO {
     private Accion accion;
     private String detalle;
     private LocalDateTime fecha;
+
+     public String getFechaTexto() {
+        return fecha == null ? "" : fecha.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+    }
 }

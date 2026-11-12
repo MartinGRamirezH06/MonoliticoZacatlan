@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head th:replace="~{plantilla/plantilla :: head}"></head>
+<body th:replace="~{plantilla/plantilla :: body(~{::#contenido-dinamico},'bitacora')}">
+<div id="contenido-dinamico">
+    <section class="admin-content container-fluid">
+        <div class="section-header">
+            <div class="section-title">
+                <div class="section-icon"><i class="bi bi-journal-text"></i></div>
+                <div>
+                    <h1>Bitácora</h1>
+                    <p>Acciones realizadas por los administradores</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filtros -->
+        <form th:action="@{/admin/bitacora}" method="get" class="card border-0 shadow-sm mb-4">
+            <div class="card-body">
+                <div class="row g-3 align-items-end">
+                    <div class="col-md-3">
+                        <label class="form-label">Entidad</label>
+                        <select class="form-select" name="entidad">
+                            <option value="">Todas</option>
+                            <option th:each="e : ${entidades}" th:value="${e}" th:text="${e}"
+                                    th:selected="${e == entidad}"></option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Administrador</label>
+                        <select class="form-select" name="adminId">
+                            <option value="">Todos</option>
+                            <option th:each="a : ${administradores}" th:value="${a.id}"
+                                    th:text="${a.nombre + ' ' + a.apellido_paterno}"
+                                    th:selected="${adminId != null and a.id == adminId}"></option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label">Desde</label>
+                        <input type="date" class="form-control" name="desde" th:value="${desde}">
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label">Hasta</label>
+                        <input type="date" class="form-control" name="hasta" th:value="${hasta}">
+                    </div>
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-primary w-100">
+                            <i class="bi bi-funnel-fill me-2"></i> Filtrar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <div class="table-search">
+            <i class="bi bi-search"></i>
+            <input type="search" class="form-control" placeholder="Buscar en los resultados">
+        </div>
+        <div class="table-responsive">
+            <table class="table admin-table align-middle">
+                <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Administrador</th>
+                    <th>Entidad</th>
+                    <th>ID</th>
+                    <th>Acción</th>
+                    <th>Detalle</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="r : ${registros}">
+                    <td class="text-nowrap" th:text="${r.fechaTexto}"></td>
+                    <td th:text="${r.adminNombre}"></td>
+                    <td th:text="${r.entidad}"></td>
+                    <td th:text="${r.entidadId}"></td>
+                    <td>
+                        <span class="status-badge"
+                              th:classappend="${r.accion.name() == 'DESACTIVAR'} ? 'status-inactive' : 'status-active'">
+                            <i class="bi bi-circle-fill"></i>
+                            <span th:text="${r.accion}"></span>
+                        </span>
+                    </td>
+                    <td class="text-break"><small th:text="${r.detalle}"></small></td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(registros)}">
+                    <td colspan="6" class="text-center text-muted">No hay movimientos con estos filtros</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>
+</body>
+</html>

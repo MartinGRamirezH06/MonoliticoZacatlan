@@ -5,8 +5,10 @@ import mx.fes.unam.model.entities.bitacora.Accion;
 import mx.fes.unam.model.entities.bloque.BloqueDTO;
 import mx.fes.unam.model.entities.producto.ProductoDTO;
 import mx.fes.unam.model.entities.producto.ProductoEntity;
+import mx.fes.unam.repository.BloqueRepository;
 import mx.fes.unam.repository.ProductoRepository;
 import mx.fes.unam.service.bitacora.BitacoraService;
+import mx.fes.unam.util.ReglaNegocioException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,12 +20,14 @@ public class ProductoService {
     private final ProductoMapper productoMapper;
     private final ProductoRepository productoRepository;
     private final BitacoraService bitacoraService;
+    private final BloqueRepository bloqueRepository;
 
     public ProductoService(ProductoMapper productoMapper, ProductoRepository productoRepository,
-                           BitacoraService bitacoraService) {
+                           BitacoraService bitacoraService, BloqueRepository bloqueRepository) {
         this.productoMapper = productoMapper;
         this.productoRepository = productoRepository;
         this.bitacoraService = bitacoraService;
+        this.bloqueRepository = bloqueRepository;
     }
 
     @Transactional(readOnly = true)
@@ -41,9 +45,12 @@ public class ProductoService {
 
 
     public ProductoDTO crearProducto(ProductoDTO producto, Long adminId) {
-        ProductoEntity pd = productoRepository.save(productoMapper.toEntity(producto));
+        ProductoEntity nuevo = productoMapper.toEntity(producto);
+        nuevo.setCategoria(resolverCategoria(producto.getCategoria(), null));
+        ProductoEntity pd = productoRepository.save(nuevo);
         bitacoraService.registrar(adminId, "PRODUCTO", pd.getId(), Accion.CREAR,
-                "Nombre: " + pd.getNombre() + ", Precio mín: " + pd.getPrecio_min());
+                "Nombre: " + pd.getNombre() + ", Precio mín: " + pd.getPrecio_min()
+                        + ", Categoría: " + pd.getCategoria());
         return productoMapper.toDTO(pd);
     }
 
@@ -54,13 +61,14 @@ public class ProductoService {
         String antes = "Nombre: " + pd.getNombre() + ", Precio mín: " + pd.getPrecio_min()
                 + ", Categoría: " + pd.getCategoria();
 
+        String categoria = resolverCategoria(dto.getCategoria(), pd.getCategoria());
         pd.setNombre(dto.getNombre());
         pd.setPrecio_min(dto.getPrecio_min());
-        pd.setCategoria(dto.getCategoria());
+        pd.setCategoria(categoria);
 
         bitacoraService.registrar(adminId, "PRODUCTO", id, Accion.EDITAR,
                 "Antes: " + antes + " | Después: Nombre: " + dto.getNombre()
-                        + ", Precio mín: " + dto.getPrecio_min() + ", Categoría: " + dto.getCategoria());
+                        + ", Precio mín: " + dto.getPrecio_min() + ", Categoría: " + categoria);
         return productoMapper.toDTO(pd);
     }
 
@@ -74,7 +82,21 @@ public class ProductoService {
     public void reactivarProducto(Long id, Long adminId) {
         ProductoEntity pd = productoRepository.findById(id).orElseThrow(() ->
                 new EntityNotFoundException("Producto no encontrado: " + id));
+        ReglaNegocioException.si(
+                bloqueRepository.findByNombreIgnoreCaseAndStatusTrue(pd.getCategoria()).isEmpty(),
+                "Su categoría (bloque) está inactiva; reactívala primero");
         pd.setStatus(true);
         bitacoraService.registrar(adminId, "PRODUCTO", id, Accion.REACTIVAR, null);
+    }
+
+    private String resolverCategoria(String categoria, String actual) {
+        ReglaNegocioException.si(categoria == null || categoria.isBlank(), "Selecciona una categoría");
+        String buscada = categoria.trim();
+        if (actual != null && actual.equalsIgnoreCase(buscada)) {
+            return actual;
+        }
+        return bloqueRepository.findByNombreIgnoreCaseAndStatusTrue(buscada)
+                .orElseThrow(() -> new ReglaNegocioException("La categoría debe ser un bloque activo"))
+                .getNombre();
     }
 }
