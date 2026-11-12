@@ -1,6 +1,7 @@
 package mx.fes.unam.controller;
 
 import mx.fes.unam.model.entities.producto.ProductoDTO;
+import mx.fes.unam.service.bloque.BloqueService;
 import mx.fes.unam.service.producto.ProductoService;
 import mx.fes.unam.util.UsuarioSesion;
 import org.springframework.stereotype.Controller;
@@ -14,14 +15,17 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class ProductoController {
     private static final String LISTA = "redirect:/producto/listar-productos";
     private final ProductoService productoService;
+    private final BloqueService bloqueService;
 
-    public ProductoController(ProductoService productoService) {
+    public ProductoController(ProductoService productoService, BloqueService bloqueService) {
         this.productoService = productoService;
+        this.bloqueService = bloqueService;
     }
 
     @GetMapping("/listar-productos")
     public String listar_productos(Model model){
         model.addAttribute("productos", productoService.listarProductos(false));
+        model.addAttribute("bloques",bloqueService.listarBloques(true));
         return "producto/lista_producto";
     }
 
