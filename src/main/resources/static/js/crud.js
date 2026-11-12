@@ -43,3 +43,31 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+document.addEventListener('DOMContentLoaded', () => {
+    const producto = document.getElementById('productoVenta');
+    const precio   = document.getElementById('precioVenta');
+    const cantidad = document.getElementById('cantidadVenta');
+    const total    = document.getElementById('totalVenta');
+    if (!producto || !precio || !cantidad || !total) return;
+
+    const fmt = new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' });
+
+    const calcular = () => {
+        const p = parseFloat(precio.value);
+        const c = parseInt(cantidad.value, 10);
+        total.textContent = fmt.format(isNaN(p) || isNaN(c) ? 0 : p * c);
+    };
+
+    producto.addEventListener('change', () => {
+        const min = producto.selectedOptions[0]?.dataset.min;
+        if (min !== undefined) {
+            // precio.value = min;
+            precio.min = min;
+        }
+        calcular();
+    });
+
+    precio.addEventListener('input', calcular);
+    cantidad.addEventListener('input', calcular);
+    calcular();
+});

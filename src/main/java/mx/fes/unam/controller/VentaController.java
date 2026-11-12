@@ -4,6 +4,7 @@ import mx.fes.unam.model.entities.venta.ReporteVentasDTO;
 import mx.fes.unam.model.entities.venta.VentaDTO;
 import mx.fes.unam.service.producto.ProductoService;
 import mx.fes.unam.service.venta.PdfVentaService;
+import mx.fes.unam.service.vendedor.VendedorService;
 import mx.fes.unam.service.venta.VentaService;
 import mx.fes.unam.util.ReglaNegocioException;
 import mx.fes.unam.util.UsuarioSesion;
@@ -25,17 +26,21 @@ public class VentaController {
     private final VentaService ventaService;
     private final ProductoService productoService;
     private final PdfVentaService pdfVentaService;
+    private final VendedorService vendedorService;
 
     public VentaController(VentaService ventaService, ProductoService productoService,
-                           PdfVentaService pdfVentaService) {
+                           PdfVentaService pdfVentaService, VendedorService vendedorService) {
         this.ventaService = ventaService;
         this.productoService = productoService;
         this.pdfVentaService = pdfVentaService;
+        this.vendedorService = vendedorService;
     }
 
     @GetMapping("/registrar")
     public String registrar(@SessionAttribute(UsuarioSesion.ATRIBUTO) UsuarioSesion usuario, Model model) {
-        model.addAttribute("productos", productoService.listarProductos(true));
+        String bloque = vendedorService.obtenerVendedor(usuario.id()).getNombreBloque();
+        model.addAttribute("productos", productoService.listarActivosPorCategoria(bloque));
+        model.addAttribute("nombreBloque", bloque);
         model.addAttribute("reporte", ventaService.reporteVendedor(usuario.id(), null));
         return "ventas/registrar_venta";
     }

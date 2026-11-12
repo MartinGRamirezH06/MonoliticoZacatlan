@@ -59,6 +59,10 @@ public class VentaService {
                 .filter(VendedorEntity::getStatus)
                 .orElseThrow(() -> new ReglaNegocioException("Vendedor inexistente o inactivo"));
         ProductoEntity producto = buscarProductoActivo(dto.getProductoId());
+        ReglaNegocioException.si(
+                vendedor.getBloque() == null
+                        || !vendedor.getBloque().getNombre().equalsIgnoreCase(producto.getCategoria()),
+                "Ese producto no pertenece a tu bloque");
 
         BigDecimal precio = dto.getPrecioUnitario() != null
                 ? dto.getPrecioUnitario()

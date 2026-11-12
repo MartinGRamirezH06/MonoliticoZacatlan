@@ -43,6 +43,12 @@ public class ProductoService {
                 new EntityNotFoundException("Producto no encontrado: " + id)));
     }
 
+    @Transactional(readOnly = true)
+    public List<ProductoDTO> listarActivosPorCategoria(String categoria) {
+        if (categoria == null || categoria.isBlank()) return List.of();
+        return productoRepository.findByCategoriaIgnoreCaseAndStatusTrue(categoria.trim())
+                .stream().map(productoMapper::toDTO).toList();
+    }
 
     public ProductoDTO crearProducto(ProductoDTO producto, Long adminId) {
         ProductoEntity nuevo = productoMapper.toEntity(producto);
