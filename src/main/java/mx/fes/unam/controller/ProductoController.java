@@ -29,6 +29,7 @@ public class ProductoController {
     public String crear(@ModelAttribute ProductoDTO producto,
                         @SessionAttribute(UsuarioSesion.ATRIBUTO) UsuarioSesion admin,
                         RedirectAttributes flash) {
+        producto.setStatus(true);
         productoService.crearProducto(producto, admin.id());
         flash.addFlashAttribute("mensaje", "Producto creado");
         return LISTA;

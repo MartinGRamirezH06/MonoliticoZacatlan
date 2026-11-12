@@ -1,4 +1,4 @@
--- =====================================================================
+    -- =====================================================================
 -- Datos de prueba para Sistema Zacatlan (reemplaza src/main/resources/data.sql)
 -- Las fechas son relativas a CURDATE(): siempre hay ventas de hoy, de esta
 -- semana, del mes y del mes anterior, sin importar cuando se arranque.

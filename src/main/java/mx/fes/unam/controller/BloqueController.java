@@ -28,6 +28,7 @@ public class BloqueController {
     public String crear(@ModelAttribute BloqueDTO bloque,
                         @SessionAttribute(UsuarioSesion.ATRIBUTO) UsuarioSesion admin,
                         RedirectAttributes flash) {
+        bloque.setStatus(true);
         bloqueService.crearBloque(bloque, admin.id());
         flash.addFlashAttribute("mensaje", "Bloque creado");
         return LISTA;

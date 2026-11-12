@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        lang="en">
+<head th:replace="~{plantilla/plantilla :: head}"></head>
+<body class="admin-body">
+<div class="admin-layout">
+    <aside class="admin-sidebar" id="sidebar">
+        <div class="sidebar-marca">
+            <i class="bi bi-buildings marca-icono"></i>
+            <div class="marca-texto">
+                <h3>ZACATLAN</h3>
+                <span>P U E B L A</span>
+            </div>
+        </div>
+        <hr class="sidebar-division">
+        <nav class="sidebar-nav">
+            <a th:href="@{/ventas/listar-ventas}"
+               class="sidebar-link active"
+            >
+                <i class="bi bi-shop"></i>
+                <span>Mis ventas</span>
+            </a>
+        </nav>
+        <div class="sidebar-inferior">
+            <a th:href="@{/login}" class="sidebar-link">
+                <i class="bi bi-buildings"></i>
+                <span> Cerrar Sesion</span>
+            </a>
+            <div class="sidebar-slogan">
+                <i class="bi bi-buildings"></i>
+                <p>Juntos construimos <strong>un mejor Zacatlan</strong></p>
+            </div>
+        </div>
+    </aside>
+    <main class="admin-main">
+        <header class="header_admin">
+            <div class="background-image-principal"></div>
+            <div class="background-difuminado-principal"></div>
+            <button class="btn btn-light mobile-menu-btn"
+                    type="button"
+                    aria-label="Abrir Menu"
+            >
+                <i class="bi bi-list"></i>
+            </button>
+            <div class="header_admin-usuario">
+                <div class="user-avatar">
+                    <i class="bi bi-person-fill"></i>
+                </div>
+                <div class="user-info">
+                    <span>JUan Perez Ramirez</span>
+                    <small>Gestion de ventas</small>
+                </div>
+            </div>
+        </header>
+        <div id="contenido-dinamico">
+            <section class="admin-content container-fluid">
+                <div class="section-header">
+                    <div class="section-title">
+                        <div class="section-icon">
+                            <i class="bi bi-box-seam-fill"></i>
+                        </div>
+                        <div>
+                            <h1>Ventas</h1>
+                            <p>Registra tus ventas en el sistema</p>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary btn-add"
+                            type="button"
+                            data-bs-toogle="modal"
+                            data-bs-target="#modalProducto"
+                    >
+                        <i class="bi bi-plus-lg me-2"></i>
+                        Agregar Venta
+                    </button>
+                </div>
+
+                <div class="table-search">
+                    <i class="bi bi-search"></i>
+                    <input
+                            type="search"
+                            class="form-control"
+                            placeholder="Buscar bloque"
+                            id="buscarBloque"
+                    >
+                </div>
+                <div class="table-responsive">
+                    <table class="table admin-table align-middle">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Producto</th>
+                            <th>Fecha</th>
+                            <th>Cantidad</th>
+                            <th>Total</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>01</td>
+                            <td>Juan Perez</td>
+                            <td>Pambazos</td>
+                            <td>12/nov/2026</td>
+                            <td>5</td>
+                            <td>200.00</td>
+
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+
+
+            </section>
+        </div>
+
+    </main>
+</div>
+
+</body>
+</html>
