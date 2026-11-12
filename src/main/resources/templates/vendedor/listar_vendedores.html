@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        lang="en">
+<head th:replace="~{plantilla/plantilla :: head}"></head>
+<body th:replace="~{plantilla/plantilla :: body(~{::#contenido-dinamico},'vendedores')}">
+<div id="contenido-dinamico">
+    <section class="admin-content container-fluid">
+        <div class="section-header">
+            <div class="section-title">
+                <div class="section-icon">
+                    <i class="bi bi-box-seam-fill"></i>
+                </div>
+                <div>
+                    <h1>Vendedores</h1>
+                    <p>Gestiona los vendedores del sistema</p>
+                </div>
+            </div>
+            <button class="btn btn-primary btn-add"
+                    type="button"
+                    data-bs-toogle="modal"
+                    data-bs-target="#modalProducto"
+            >
+                <i class="bi bi-plus-lg me-2"></i>
+                Agregar Vendedor
+            </button>
+        </div>
+
+        <div class="table-search">
+            <i class="bi bi-search"></i>
+            <input
+                    type="search"
+                    class="form-control"
+                    placeholder="Buscar vendedor"
+                    id="buscarProducto"
+            >
+        </div>
+        <div class="table-responsive">
+            <table class="table admin-table align-middle">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Bloque</th>
+                    <th>Nombre</th>
+                    <th>Apellido paterno</th>
+                    <th>Apellido materno</th>
+                    <th>Correo</th>
+                    <th>Telefono</th>
+                    <th>Rol</th>
+                    <th>Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>01</td>
+                    <td>Comida</td>
+                    <td>Juan</td>
+                    <td>Ramirez</td>
+                    <td>Hilario</td>
+                    <td>juan@gmail.com</td>
+                    <td>5551917533</td>
+                    <td>Vendedor</td>
+                    <td>
+                        <div class="table-actions">
+                            <button class="btn-action"
+                                    title="Editar">
+                                <i class="bi bi-pencil-fill"></i>
+                            </button>
+
+                            <button class="btn-action btn-delete"
+                                    title="Eliminar">
+                                <i class="bi bi-trash-fill"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>
+</body>
+</html>

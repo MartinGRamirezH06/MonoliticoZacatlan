@@ -12,9 +12,79 @@
     <link rel="stylesheet" th:href="@{/css/styles.css}">
     <title>Title</title>
 </head>
-<body>
+<body th:fragment="body(contenidoHTML,menuActivo)" class="admin-body">
+<div class="admin-layout">
+    <aside class="admin-sidebar" id="sidebar">
+        <div class="sidebar-marca">
+            <i class="bi bi-buildings marca-icono"></i>
+            <div class="marca-texto">
+                <h3>ZACATLAN</h3>
+                <span>P U E B L A</span>
+            </div>
+        </div>
+        <hr class="sidebar-division">
+        <nav class="sidebar-nav">
+            <div class="side-section">
+                TABLAS
+            </div>
+            <a th:href="@{/bloque/listar-bloque}"
+               class="sidebar-link"
+                th:classappend="${menuActivo == 'bloques' ? 'active': ''}"
+            >
+                <i class="bi bi-grid-fill"></i>
+                <span>Bloques</span>
+            </a>
+            <a th:href="@{/producto/listar-productos}"
+               class="sidebar-link"
+                th:classappend="${menuActivo == 'productos' ? 'active' : ''}"
+            >
+                <i class="bi bi-box-seam-fill"></i>
+                <span>Productos</span>
+            </a>
+            <a th:href="@{/vendedor/listar-vendedores}"
+               class="sidebar-link"
+                th:classappend="${menuActivo == 'vendedores' ? 'active' : ''}"
+            >
+                <i class="bi bi-shop"></i>
+                <span>Vendedores</span>
+            </a>
+        </nav>
+        <div class="sidebar-inferior">
+            <a th:href="@{/login}" class="sidebar-link">
+                <i class="bi bi-buildings"></i>
+                <span> Cerrar Sesion</span>
+            </a>
+            <div class="sidebar-slogan">
+                <i class="bi bi-buildings"></i>
+                <p>Juntos construimos <strong>un mejor Zacatlan</strong></p>
+            </div>
+        </div>
+    </aside>
+    <main class="admin-main">
+        <header class="header_admin">
+            <div class="background-image-principal"></div>
+            <div class="background-difuminado-principal"></div>
+            <button class="btn btn-light mobile-menu-btn"
+                    type="button"
+                    aria-label="Abrir Menu"
+            >
+                <i class="bi bi-list"></i>
+            </button>
+            <div class="header_admin-usuario">
+                <div class="user-avatar">
+                    <i class="bi bi-person-fill"></i>
+                </div>
+                <div class="user-info">
+                    <span>Administrador</span>
+                    <small>Gestion del sistema</small>
+                </div>
+            </div>
+        </header>
 
 
-</body>
+        <div th:replace="${contenidoHTML}"></div>
+    </main>
+</div>
 <script th:fragment="scriptMovimiento" th:src="@{/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</body>
 </html>
