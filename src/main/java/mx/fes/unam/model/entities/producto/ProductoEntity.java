@@ -29,7 +29,7 @@ public class ProductoEntity {
     private String categoria;
 
     @Column(nullable = false)
-    private Boolean status;
+    private Boolean status= true;
 
     //@Column(name = "ruta_imagen", length = 255)
     //private String rutaImagen;

@@ -2,7 +2,9 @@ package mx.fes.unam.service.bloque;
 
 import mx.fes.unam.model.entities.bloque.BloqueDTO;
 import mx.fes.unam.model.entities.bloque.BloqueEntity;
+import org.springframework.stereotype.Controller;
 
+@Controller
 public class BloqueMapper {
     public BloqueEntity toEntity(BloqueDTO dto){
         BloqueEntity bloque = new BloqueEntity();

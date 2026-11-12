@@ -3,7 +3,9 @@ package mx.fes.unam.service.vendedor;
 import mx.fes.unam.model.entities.bloque.BloqueEntity;
 import mx.fes.unam.model.entities.vendedor.VendedorDTO;
 import mx.fes.unam.model.entities.vendedor.VendedorEntity;
+import org.springframework.stereotype.Controller;
 
+@Controller
 public class VendedorMapper {
     public VendedorEntity toEntity(VendedorDTO dto){
         VendedorEntity vendedor = new VendedorEntity();

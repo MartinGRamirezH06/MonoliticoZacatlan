@@ -34,6 +34,9 @@ public class VentaEntity {
     @Column(nullable = false)
     private LocalDate fecha;
 
+    @Column(name = "precio_unitario", nullable = false, precision = 10, scale = 2)
+    private BigDecimal precioUnitario;
+
     @Column(nullable = false)
     private Long cantidad;
 
@@ -41,5 +44,5 @@ public class VentaEntity {
     private BigDecimal total;
 
     @Column(nullable = false)
-    private Boolean status;
+    private Boolean status= true;
 }

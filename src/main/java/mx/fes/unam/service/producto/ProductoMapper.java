@@ -3,7 +3,9 @@ package mx.fes.unam.service.producto;
 
 import mx.fes.unam.model.entities.producto.ProductoDTO;
 import mx.fes.unam.model.entities.producto.ProductoEntity;
+import org.springframework.stereotype.Controller;
 
+@Controller
 public class ProductoMapper {
     public ProductoEntity toEntity(ProductoDTO dto){
         ProductoEntity producto = new ProductoEntity();

@@ -25,5 +25,5 @@ public class BloqueEntity {
     private String descripcion;
 
     @Column(nullable = false )
-    private Boolean status;
+    private Boolean status= true;
 }
