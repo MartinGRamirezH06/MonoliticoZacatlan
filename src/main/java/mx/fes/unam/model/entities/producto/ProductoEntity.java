@@ -22,11 +22,14 @@ public class ProductoEntity {
     @Column(nullable = true, length = 50)
     private String nombre;
 
-    @Column(nullable = true, length = 20)
+    @Column(nullable = true)
     private BigDecimal precio_min;
 
     @Column(nullable = true, length = 50)
     private String categoria;
+
+    @Column(nullable = false)
+    private Boolean status;
 
     //@Column(name = "ruta_imagen", length = 255)
     //private String rutaImagen;

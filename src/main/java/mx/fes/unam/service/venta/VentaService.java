@@ -7,9 +7,10 @@ import mx.fes.unam.model.entities.venta.VentaEntity;
 import mx.fes.unam.repository.VendedorRepository;
 import mx.fes.unam.repository.VentaRepository;
 import mx.fes.unam.service.vendedor.VendedorMapper;
-
+import org.springframework.stereotype.Service;
 import java.util.List;
 
+@Service
 public class VentaService {
     private final VentaMapper ventaMapper;
     private final VentaRepository ventaRepository;

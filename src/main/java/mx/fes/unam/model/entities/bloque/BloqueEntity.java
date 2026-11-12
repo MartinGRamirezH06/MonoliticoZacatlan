@@ -24,4 +24,6 @@ public class BloqueEntity {
     @Column(nullable = true)
     private String descripcion;
 
+    @Column(nullable = false )
+    private Boolean status;
 }

@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.text.DateFormat;
+import java.time.LocalDate;
 
 @Data
 @AllArgsConstructor
@@ -17,7 +18,7 @@ public class VentaDTO {
     String vendedorNombre;
     Long productoId;
     String productoNombre;
-    DateFormat fecha;
+    LocalDate fecha;
     Long cantidad;
     Double total;
 }

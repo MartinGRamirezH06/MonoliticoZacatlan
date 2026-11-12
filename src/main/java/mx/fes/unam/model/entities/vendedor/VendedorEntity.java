@@ -33,8 +33,9 @@ public class VendedorEntity {
     @Column(nullable = false,length = 10)
     private String telefono;
 
-    @Column(nullable = false, length = 8)
-    private String rol;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 10)
+    private Rol rol;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "bloque_id",referencedColumnName = "id",nullable = false)

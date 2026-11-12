@@ -9,9 +9,11 @@ import mx.fes.unam.repository.BloqueRepository;
 import mx.fes.unam.repository.ProductoRepository;
 import mx.fes.unam.repository.VendedorRepository;
 import mx.fes.unam.service.producto.ProductoMapper;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class VendedorService {
     private final VendedorMapper vendedorMapper;
     private final VendedorRepository vendedorRepository;

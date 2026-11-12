@@ -8,7 +8,9 @@ import lombok.NoArgsConstructor;
 import mx.fes.unam.model.entities.producto.ProductoEntity;
 import mx.fes.unam.model.entities.vendedor.VendedorEntity;
 
+import java.math.BigDecimal;
 import java.text.DateFormat;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "venta")
@@ -29,12 +31,15 @@ public class VentaEntity {
     @JoinColumn(name = "producto_id",referencedColumnName = "id", nullable = false)
     private ProductoEntity producto;
 
-    @Column(nullable = false, length = 50)
-    private DateFormat fecha;
+    @Column(nullable = false)
+    private LocalDate fecha;
 
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false)
     private Long cantidad;
 
-    @Column(nullable = false,length = 50)
-    private Double total;
+    @Column(nullable = false)
+    private BigDecimal total;
+
+    @Column(nullable = false)
+    private Boolean status;
 }

@@ -3,9 +3,11 @@ package mx.fes.unam.service.producto;
 import mx.fes.unam.model.entities.producto.ProductoDTO;
 import mx.fes.unam.model.entities.producto.ProductoEntity;
 import mx.fes.unam.repository.ProductoRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class ProductoService {
     private final ProductoMapper productoMapper;
     private final ProductoRepository productoRepository;

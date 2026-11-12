@@ -18,7 +18,7 @@ public class VendedorDTO {
     String apellido_materno;
     String correo;
     String telefono;
-    String rol;
+    Rol rol;
     Boolean status;
     String password;
 }

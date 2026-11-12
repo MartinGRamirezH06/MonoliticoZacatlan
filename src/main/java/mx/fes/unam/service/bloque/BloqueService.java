@@ -3,9 +3,11 @@ package mx.fes.unam.service.bloque;
 import mx.fes.unam.model.entities.bloque.BloqueDTO;
 import mx.fes.unam.model.entities.bloque.BloqueEntity;
 import mx.fes.unam.repository.BloqueRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class BloqueService {
     private final BloqueMapper bloqueMapper;
     private final BloqueRepository bloqueRepository;
@@ -30,6 +32,6 @@ public class BloqueService {
         return bloque;
     }
 
-    public void eliminarLibro(Long id){bloqueRepository.deleteById(id);}
+    public void eliminarBloque(Long id){bloqueRepository.deleteById(id);}
 
 }
