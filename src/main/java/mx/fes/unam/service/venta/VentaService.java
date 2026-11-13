@@ -151,10 +151,10 @@ public class VentaService {
     }
 
     @Transactional(readOnly = true)
-    public ReporteVentasDTO reporteVendedor(Long vendedorId, LocalDate fecha) {
+    /** Reporte del vendedor: siempre el del día de hoy (no recibe fecha). */
+    public ReporteVentasDTO reporteVendedor(Long vendedorId) {
         ReporteFiltroDTO filtro = new ReporteFiltroDTO();
-        filtro.setPeriodo(Periodo.DIA);
-        filtro.setFecha(fecha);
+        filtro.setPeriodo(Periodo.DIA);   // sin fecha => hoy
         filtro.setVendedorId(vendedorId);
         return generarReporte(filtro);
     }

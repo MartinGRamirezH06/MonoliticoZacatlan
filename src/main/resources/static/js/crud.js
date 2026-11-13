@@ -22,6 +22,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const pass = form.elements['password'];
         if (pass) pass.required = (btn.dataset.modo === 'crear');
+
+        // El bloque solo se elige al crear; al editar se muestra pero no se puede cambiar
+        const editando = btn.dataset.modo === 'editar';
+        const bloque = form.elements['bloqueId'];
+        if (bloque) bloque.disabled = editando;
+        modal.querySelectorAll('[data-solo-editar]').forEach((el) => { el.hidden = !editando; });
     });
 });
 // Buscador: filtra las filas de la tabla mientras escribes

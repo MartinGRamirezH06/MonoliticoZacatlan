@@ -87,7 +87,7 @@
                 </div>
                 <div class="user-info">
                     <span th:text="${usuario != null ? usuario.nombre() : 'Administrador'}">Administrador</span>
-                    <small th:text="${usuario != null and usuario.esAdmin() ? 'Gestion del sistema' : 'Vendedor'}">Gestion del sistema</small>
+                    <small th:text="${usuario != null and usuario.esAdmin() ? 'Gestion del sistema' : (usuario != null and usuario.bloque() != null ? 'Vendedor · ' + usuario.bloque() : 'Vendedor')}">Gestion del sistema</small>
                 </div>
             </div>
         </header>

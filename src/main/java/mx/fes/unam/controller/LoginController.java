@@ -38,7 +38,8 @@ public class LoginController {
             HttpSession sesion = request.getSession();
             request.changeSessionId();
             sesion.setAttribute(UsuarioSesion.ATRIBUTO,
-                    new UsuarioSesion(v.getId(), v.getNombre() + " " + v.getApellido_paterno(), v.getRol()));
+                    new UsuarioSesion(v.getId(), v.getNombre() + " " + v.getApellido_paterno(), v.getRol(),
+                            v.getNombreBloque()));
             return "redirect:/";
         } catch (ReglaNegocioException e) {
             flash.addFlashAttribute("error", e.getMessage());

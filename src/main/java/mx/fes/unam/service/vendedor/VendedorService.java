@@ -101,13 +101,13 @@ public class VendedorService {
             throw new ReglaNegocioException("Ya existe un usuario con ese correo");
         }
 
-        StringBuilder cambios = new StringBuilder();
+        // Regla de negocio: el bloque se elige al crear al vendedor y ya no se puede cambiar
         Long bloqueActual = vnd.getBloque() != null ? vnd.getBloque().getId() : null;
-        if (vnd.getRol() == Rol.VENDEDOR && !Objects.equals(bloqueActual, vendedor.getBloqueId())) {
-            cambios.append("Bloque: ").append(bloqueActual)
-                    .append(" -> ").append(vendedor.getBloqueId()).append("; ");
-            vnd.setBloque(buscarBloqueActivo(vendedor.getBloqueId()));
-        }
+        ReglaNegocioException.si(
+                vendedor.getBloqueId() != null && !Objects.equals(bloqueActual, vendedor.getBloqueId()),
+                "El bloque de un vendedor no se puede cambiar");
+
+        StringBuilder cambios = new StringBuilder();
         if (vnd.getRol() != vendedor.getRol()) {
             cambios.append("Rol: ").append(vnd.getRol()).append(" -> ").append(vendedor.getRol()).append("; ");
             vnd.setRol(vendedor.getRol());

@@ -5,7 +5,7 @@ import mx.fes.unam.model.entities.vendedor.Rol;
 import java.io.Serializable;
 
 /** Datos mínimos del usuario que inició sesión (se guardan en HttpSession). */
-public record UsuarioSesion(Long id, String nombre, Rol rol) implements Serializable {
+public record UsuarioSesion(Long id, String nombre, Rol rol, String bloque) implements Serializable {
     public static final String ATRIBUTO = "usuario";
 
     public boolean esAdmin() {

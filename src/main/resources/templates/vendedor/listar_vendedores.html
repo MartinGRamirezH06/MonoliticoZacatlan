@@ -124,6 +124,7 @@
                                     <select class="form-select" name="bloqueId" required>
                                         <option th:each="bl : ${bloques}" th:value="${bl.id}" th:text="${bl.nombre}"></option>
                                     </select>
+                                    <div class="form-text" data-solo-editar hidden>El bloque no se puede cambiar una vez asignado.</div>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">Contraseña</label>

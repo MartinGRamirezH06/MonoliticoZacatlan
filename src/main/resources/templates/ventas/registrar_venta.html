@@ -73,12 +73,9 @@
 
                 <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-2">
                     <h5 class="mb-0">Ventas del <span th:text="${reporte.desde}"></span></h5>
-                    <form th:action="@{/venta/reporte/pdf}" method="get" class="d-flex gap-2">
-                        <input type="date" name="fecha" class="form-control" th:value="${reporte.desde}">
-                        <button type="submit" class="btn btn-outline-secondary text-nowrap">
-                            <i class="bi bi-file-earmark-pdf-fill me-1"></i> PDF
-                        </button>
-                    </form>
+                    <a th:href="@{/venta/reporte/pdf}" class="btn btn-outline-secondary text-nowrap">
+                        <i class="bi bi-file-earmark-pdf-fill me-1"></i> Descargar PDF del día
+                    </a>
                 </div>
 
                 <div class="table-responsive">

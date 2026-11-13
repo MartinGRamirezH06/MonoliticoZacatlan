@@ -8,7 +8,6 @@ import mx.fes.unam.service.vendedor.VendedorService;
 import mx.fes.unam.service.venta.VentaService;
 import mx.fes.unam.util.ReglaNegocioException;
 import mx.fes.unam.util.UsuarioSesion;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -16,8 +15,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import java.time.LocalDate;
 
 /** Pantalla del vendedor: registrar ventas y descargar su reporte del día. */
 @Controller
@@ -41,7 +38,7 @@ public class VentaController {
         String bloque = vendedorService.obtenerVendedor(usuario.id()).getNombreBloque();
         model.addAttribute("productos", productoService.listarActivosPorCategoria(bloque));
         model.addAttribute("nombreBloque", bloque);
-        model.addAttribute("reporte", ventaService.reporteVendedor(usuario.id(), null));
+        model.addAttribute("reporte", ventaService.reporteVendedor(usuario.id()));
         return "ventas/registrar_venta";
     }
 
@@ -59,10 +56,8 @@ public class VentaController {
     }
 
     @GetMapping("/reporte/pdf")
-    public ResponseEntity<byte[]> pdf(@SessionAttribute(UsuarioSesion.ATRIBUTO) UsuarioSesion usuario,
-                                      @RequestParam(required = false)
-                                      @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha) {
-        ReporteVentasDTO reporte = ventaService.reporteVendedor(usuario.id(), fecha);
+    public ResponseEntity<byte[]> pdf(@SessionAttribute(UsuarioSesion.ATRIBUTO) UsuarioSesion usuario) {
+        ReporteVentasDTO reporte = ventaService.reporteVendedor(usuario.id());
         byte[] pdf = pdfVentaService.generarReporte(reporte);
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION,
